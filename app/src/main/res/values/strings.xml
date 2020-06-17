@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Words Filtering</string>
+    <string name="dummy_text">Dummy Text</string>
 </resources>
