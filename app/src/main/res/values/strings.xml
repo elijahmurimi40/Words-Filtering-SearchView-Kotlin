@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Words Filtering</string>
     <string name="dummy_text">Dummy Text</string>
+    <string name="search">Search</string>
+    <string name="search_name">Search Name</string>
+    <string name="no_results_found">No Results Found for %1$s</string>
 </resources>
