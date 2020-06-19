@@ -5,6 +5,8 @@ Minimum Android Version 4.0 (Ice Cream Sandwich)
 
 #### PS
 	Used Kotlin coroutines delay function to simulate long running search
+	
+### Demos
 
 ## License
 
