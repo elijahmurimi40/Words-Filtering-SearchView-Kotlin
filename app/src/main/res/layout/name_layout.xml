@@ -15,9 +15,7 @@
         android:layout_marginRight="16dp"
         android:ellipsize="end"
         android:text="@string/dummy_text"
-        android:textColor="@color/text_color"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
