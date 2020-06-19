@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     private fun searchName(p0: String?) {
         search_progress.visibility = View.VISIBLE
         adapter.string = p0
-        adapter.filter.filter(p0) {
+        adapter.filter.filter(p0!!.toLowerCase(Locale.getDefault())) {
             when(adapter.itemCount) {
                 0 -> {
                     no_results_found.visibility = View.VISIBLE
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             Log.i("MainActivityA", adapter.string!!)
-            Log.i("MainActivity", p0!!)
+            Log.i("MainActivity", p0)
             if (adapter.string == "" || adapter.string == p0) {
                 Log.i("MainActivity", "done")
                 search_progress.visibility = View.GONE
