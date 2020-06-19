@@ -1,5 +1,11 @@
 package com.fortie40.wordsfiltering
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.TextAppearanceSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +24,7 @@ class MainActivityAdapter(names: List<String>):
     private var originalList: List<String> = names
     private var mFilteredList: List<String> = names
     var string: String? = null
+    private var searchString: String? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainActivityViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,7 +38,24 @@ class MainActivityAdapter(names: List<String>):
 
     override fun onBindViewHolder(holder: MainActivityViewHolder, position: Int) {
         val name = mFilteredList[position]
-        holder.bind(name)
+        if (string != null && string!!.isNotEmpty()) {
+            val startPos = name.toLowerCase(Locale.getDefault())
+                .indexOf(searchString!!.toLowerCase(Locale.getDefault()))
+            val endPos = startPos + searchString!!.length
+
+            if (startPos != -1) {
+                val spannable = SpannableString(name)
+                val blueColor = ColorStateList(arrayOf(intArrayOf()), intArrayOf(Color.BLUE))
+                val highlightSpan = TextAppearanceSpan(
+                    null, Typeface.BOLD, -1, blueColor, null)
+                spannable.setSpan(highlightSpan, startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.bind(spannable)
+            } else {
+                holder.bind(name)
+            }
+        } else {
+            holder.bind(name)
+        }
     }
 
     override fun getFilter(): Filter {
@@ -40,17 +64,18 @@ class MainActivityAdapter(names: List<String>):
 
     private val filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults = runBlocking {
-            val chaString = constraint.toString()
+            val charString = constraint.toString()
 
-            mFilteredList = if (chaString.isEmpty()) {
+            mFilteredList = if (charString.isEmpty()) {
                 originalList
             } else {
                 delay(3000)
                 val filteredList = originalList
-                    .filter { it.toLowerCase(Locale.getDefault()).contains(chaString) }
+                    .filter { it.toLowerCase(Locale.getDefault()).contains(charString) }
                     .toMutableList()
                 Log.i("adapter", "********")
                 Log.i("adapter", "filtered")
+                searchString = charString
                 filteredList
             }
             val filterResults = FilterResults()
@@ -65,10 +90,14 @@ class MainActivityAdapter(names: List<String>):
         }
     }
 
-    class MainActivityViewHolder(private val nItemView: View): RecyclerView.ViewHolder(nItemView) {
+    class MainActivityViewHolder(nItemView: View): RecyclerView.ViewHolder(nItemView) {
+        private val name = nItemView.findViewById<TextView>(R.id.name)
 
         fun bind(nameA: String) {
-            val name = nItemView.findViewById<TextView>(R.id.name)
+            name.text = nameA
+        }
+
+        fun bind(nameA: Spannable) {
             name.text = nameA
         }
     }
