@@ -1,3 +1,7 @@
+<p align="center"><img 
+	src="demo/logo.png" 
+	alt="Logo" width="40px" height="40px" /></p>
+	
 # Words-Filtering-SearchView-Kotlin
 Search for a programming language and the searched text in recyclerview is highlighted.
 
@@ -7,6 +11,12 @@ Minimum Android Version 4.0 (Ice Cream Sandwich)
 	Used Kotlin coroutines delay function to simulate long running search
 	
 ### Demos
+<img 
+	src="demo/demo1.gif" 
+	alt="Demo" height="500px" hspace="20" />
+<img 
+	src="demo/demo2.gif" 
+	alt="Demo" height="500px" hspace="20" />
 
 ## License
 
