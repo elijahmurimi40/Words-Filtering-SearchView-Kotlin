@@ -1,13 +1,13 @@
 package com.fortie40.wordsfiltering
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
@@ -68,15 +68,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchName(p0: String?) {
-        adapter.filter.filter(p0!!.toLowerCase(Locale.getDefault())) {
+        search_progress.visibility = View.VISIBLE
+        adapter.string = p0
+        adapter.filter.filter(p0) {
             when(adapter.itemCount) {
                 0 -> {
                     no_results_found.visibility = View.VISIBLE
-                    no_results_found.text =getString(R.string.no_results_found, p0)
+                    no_results_found.text = getString(R.string.no_results_found, p0)
                 }
                 else -> {
                     no_results_found.visibility = View.GONE
                 }
+            }
+            Log.i("MainActivityA", adapter.string!!)
+            Log.i("MainActivity", p0!!)
+            if (adapter.string == "" || adapter.string == p0) {
+                Log.i("MainActivity", "done")
+                search_progress.visibility = View.GONE
             }
         }
     }
