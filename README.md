@@ -3,7 +3,11 @@
 	alt="Logo" width="40px" height="40px" /></p>
 	
 # Words-Filtering-SearchView-Kotlin
-Search for a programming language and the searched text in recyclerview is highlighted.
+Search for a programming language and the searched text in recyclerview is highlighted. Other customization for SearchView
+
+[Words-Filtering2](https://github.com/fortie40/Words-Filtering2)
+
+[Words-Filtering3 The Final Episode :laughing::stuck_out_tongue_winking_eye:](https://github.com/fortie40/Words-Filtering3)
 
 Minimum Android Version 4.0 (Ice Cream Sandwich)
 
